@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 fya_heading() {
   if [[ -z "${MARKDOWN}" ]]; then
     echo "MARKDOWN is undefined" >&2
@@ -22,3 +21,5 @@ fya_filename() {
   string=$1
   echo "$(date +%Y%m%d)-$(fya_slug ${string}).md"
 }
+
+# vim: ft=sh

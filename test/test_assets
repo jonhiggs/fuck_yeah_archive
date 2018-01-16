@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+source $(dirname $0)/../lib/assets.sh
+
+setUp() {
+  export MARKDOWN=$(cat "$(dirname $0)/samples/1.md")
+}
+
+testImages() {
+  assertTrue \
+    "without alt tag" \
+    "fya_images | grep '^2$'"
+
+  assertTrue \
+    "with alt tag" \
+    "fya_images | grep '^3$'"
+
+  assertTrue \
+    "inline image" \
+    "fya_images | grep '^5$'"
+}
+
+testAssetUrl() {
+  assertEquals \
+    'http://www.google.com/' "$(fya_asset_url 1)"
+
+  assertEquals \
+    'blah.jpg' "$(fya_asset_url 2)"
+
+  assertEquals \
+    'http://www.google.com/blah.jpg' "$(fya_asset_url 3)"
+}
+
+
+# load and run shUnit2
+source $(dirname $0)/shunit/src/shunit2
+
+# vim: ai ts=2 sw=2 et sts=2 ft=sh
