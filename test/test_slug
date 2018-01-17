@@ -39,6 +39,12 @@ testFileName() {
     '[[ "$(_filename "test")" =~ test\.md ]]'
 }
 
+testAssetDirectory() {
+  assertTrue \
+    "blah" \
+    '[[ "$(_asset_directory "blah")" =~ ^[0-9]{8}-blah$ ]]'
+}
+
 # load and run shUnit2
 source $(dirname $0)/shunit/src/shunit2
 
