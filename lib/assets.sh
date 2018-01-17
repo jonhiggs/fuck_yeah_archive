@@ -1,4 +1,4 @@
-images() {
+_image_refs() {
   if [[ -z "${MARKDOWN}" ]]; then
     echo "MARKDOWN is undefined" >&2
     return 1
@@ -11,7 +11,7 @@ images() {
     | uniq
 }
 
-asset_url() {
+_asset_url() {
   ref=$1
   echo "${MARKDOWN}" \
     | awk '/^\['${ref}'\]:\ .*/ { print $2 }'

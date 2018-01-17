@@ -8,26 +8,26 @@ setUp() {
 testImages() {
   assertTrue \
     "without alt tag" \
-    "images | grep '^2$'"
+    "_image_refs | grep '^2$'"
 
   assertTrue \
     "with alt tag" \
-    "images | grep '^3$'"
+    "_image_refs | grep '^3$'"
 
   assertTrue \
     "inline image" \
-    "images | grep '^5$'"
+    "_image_refs | grep '^5$'"
 }
 
 testAssetUrl() {
   assertEquals \
-    'http://www.google.com/' "$(asset_url 1)"
+    'http://www.google.com/' "$(_asset_url 1)"
 
   assertEquals \
-    'blah.jpg' "$(asset_url 2)"
+    'blah.jpg' "$(_asset_url 2)"
 
   assertEquals \
-    'http://www.google.com/blah.jpg' "$(asset_url 3)"
+    'http://www.google.com/blah.jpg' "$(_asset_url 3)"
 }
 
 
