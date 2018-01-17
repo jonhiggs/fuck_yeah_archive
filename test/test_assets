@@ -3,6 +3,7 @@ source $(dirname $0)/../lib/assets.sh
 
 setUp() {
   export MARKDOWN=$(cat "$(dirname $0)/samples/1.md")
+  export DATE=$(date +%Y%m%d)
 }
 
 testImages() {
@@ -24,10 +25,20 @@ testAssetUrl() {
     'http://www.google.com/' "$(_asset_url 1)"
 
   assertEquals \
-    'blah.jpg' "$(_asset_url 2)"
+    'blah2.jpg' "$(_asset_url 2)"
 
   assertEquals \
-    'http://www.google.com/blah.jpg' "$(_asset_url 3)"
+    'http://www.google.com/blah3.jpg' "$(_asset_url 3)"
+}
+
+test_asset_filename() {
+  assertEquals \
+    "an unqualified asset filename" \
+    "${DATE}-the-heading/blah2.jpg" "$(_asset_filename 2)"
+
+  assertEquals \
+    "a fully qualified asset filename" \
+    "${DATE}-the-heading/blah3.jpg" "$(_asset_filename 3)"
 }
 
 
