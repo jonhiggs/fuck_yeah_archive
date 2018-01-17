@@ -1,4 +1,4 @@
-fya_images() {
+images() {
   if [[ -z "${MARKDOWN}" ]]; then
     echo "MARKDOWN is undefined" >&2
     return 1
@@ -11,7 +11,7 @@ fya_images() {
     | uniq
 }
 
-fya_asset_url() {
+asset_url() {
   ref=$1
   echo "${MARKDOWN}" \
     | awk '/^\['${ref}'\]:\ .*/ { print $2 }'

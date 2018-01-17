@@ -1,4 +1,4 @@
-fya_heading() {
+_heading() {
   if [[ -z "${MARKDOWN}" ]]; then
     echo "MARKDOWN is undefined" >&2
     return 1
@@ -9,7 +9,7 @@ fya_heading() {
     | sed -E 's/^[\#\ ]+//'
 }
 
-fya_slug() {
+_slug() {
   string=$1
   echo "${string}" \
     | tr [:upper:] [:lower:]  \
@@ -17,9 +17,9 @@ fya_slug() {
     | sed -E 's/-+/-/g'
 }
 
-fya_filename() {
+_filename() {
   string=$1
-  echo "$(date +%Y%m%d)-$(fya_slug ${string}).md"
+  echo "$(date +%Y%m%d)-$(_slug ${string}).md"
 }
 
 # vim: ft=sh

@@ -12,31 +12,31 @@ testMarkdownEnvVar() {
 
   assertEquals \
     "MARKDOWN has length" \
-    '310' $(echo "${MARKDOWN}" | wc -c)
+    '296' $(echo "${MARKDOWN}" | wc -c)
 }
 
 testHeading() {
   assertEquals \
-    "The Heading" "$(fya_heading)"
+    "The Heading" "$(_heading)"
 }
 
 testSlug() {
   assertEquals \
-    "the-heading" "$(fya_slug 'The Heading')"
+    "the-heading" "$(_slug 'The Heading')"
 }
 
 testFileName() {
   assertTrue \
     "has md extension" \
-    '[[ "$(fya_filename "test")" =~ \.md$ ]]'
+    '[[ "$(_filename "test")" =~ \.md$ ]]'
 
   assertTrue \
     "has date" \
-    '[[ "$(fya_filename "test")" =~ ^[0-9]{8}- ]]'
+    '[[ "$(_filename "test")" =~ ^[0-9]{8}- ]]'
 
   assertTrue \
     "has slug" \
-    '[[ "$(fya_filename "test")" =~ test\.md ]]'
+    '[[ "$(_filename "test")" =~ test\.md ]]'
 }
 
 # load and run shUnit2
