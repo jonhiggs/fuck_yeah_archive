@@ -1,5 +1,3 @@
-source $(dirname "${BASH_SOURCE[0]}")/slug.sh
-
 _page_heading() {
   if [[ -z "${MARKDOWN}" ]]; then
     echo "MARKDOWN is undefined" >&2
@@ -34,6 +32,5 @@ _page_image_refs() {
     | sort -n \
     | uniq
 }
-
 
 # vim: ft=sh

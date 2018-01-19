@@ -1,4 +1,5 @@
 source $(dirname "${BASH_SOURCE[0]}")/page.sh
+source $(dirname "${BASH_SOURCE[0]}")/slug.sh
 
 _asset_url() {
   ref=$1
