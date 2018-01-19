@@ -2,7 +2,12 @@ source $(dirname "${BASH_SOURCE[0]}")/page.sh
 source $(dirname "${BASH_SOURCE[0]}")/slug.sh
 
 _asset_url() {
-  echo "need to exand to fully qualified urls"
+  ref_source=$(_page_ref_source $1)
+  if [[ "${ref_source}" =~ ^https ]]; then
+    echo "${ref_source}"
+  else
+    echo "$(_page_source)$(_page_ref_source $1)"
+  fi
 }
 
 _asset_filename() {
