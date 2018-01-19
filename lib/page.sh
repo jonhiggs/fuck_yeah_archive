@@ -20,6 +20,12 @@ _page_refs() {
   echo "not implemented" >&2
 }
 
+_page_ref_source() {
+  ref=$1
+  echo "${MARKDOWN}" \
+    | awk '/^\['${ref}'\]:\ .*/ { print $2 }'
+}
+
 _page_image_refs() {
   if [[ -z "${MARKDOWN}" ]]; then
     echo "MARKDOWN is undefined" >&2

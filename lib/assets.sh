@@ -2,9 +2,7 @@ source $(dirname "${BASH_SOURCE[0]}")/page.sh
 source $(dirname "${BASH_SOURCE[0]}")/slug.sh
 
 _asset_url() {
-  ref=$1
-  echo "${MARKDOWN}" \
-    | awk '/^\['${ref}'\]:\ .*/ { print $2 }'
+  echo "need to exand to fully qualified urls"
 }
 
 _asset_filename() {

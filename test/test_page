@@ -25,8 +25,18 @@ testPageSource() {
     "http://example.com/blah.html" "$(_page_source)"
 }
 
+testPageRefSource() {
+  assertEquals \
+    'http://www.google.com/' "$(_page_ref_source 1)"
 
-testImageRefs() {
+  assertEquals \
+    'blah2.jpg' "$(_page_ref_source 2)"
+
+  assertEquals \
+    'http://www.google.com/blah3.jpg' "$(_page_ref_source 3)"
+}
+
+testPageImageRefs() {
   assertTrue \
     "without alt tag" \
     "_page_image_refs | grep '^2$'"
