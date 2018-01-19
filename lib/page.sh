@@ -11,6 +11,13 @@ _page_heading() {
     | sed -E 's/^[\#\ ]+//'
 }
 
+_page_source() {
+  echo "${MARKDOWN}" \
+    | grep -m1 '^\[Source\]' \
+    | sed 's/^.*(//' \
+    | cut -d\  -f1
+}
+
 _page_refs() {
   echo "not implemented" >&2
 }

@@ -20,6 +20,12 @@ testPageHeading() {
     "The Heading" "$(_page_heading)"
 }
 
+testPageSource() {
+  assertEquals \
+    "http://example.com/blah.html" "$(_page_source)"
+}
+
+
 testImageRefs() {
   assertTrue \
     "without alt tag" \
