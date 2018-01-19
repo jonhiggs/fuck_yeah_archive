@@ -6,20 +6,6 @@ setUp() {
   export DATE=$(date +%Y%m%d)
 }
 
-testImages() {
-  assertTrue \
-    "without alt tag" \
-    "_image_refs | grep '^2$'"
-
-  assertTrue \
-    "with alt tag" \
-    "_image_refs | grep '^3$'"
-
-  assertTrue \
-    "inline image" \
-    "_image_refs | grep '^5$'"
-}
-
 testAssetUrl() {
   assertEquals \
     'http://www.google.com/' "$(_asset_url 1)"

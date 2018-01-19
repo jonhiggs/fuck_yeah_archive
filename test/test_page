@@ -20,6 +20,20 @@ testPageHeading() {
     "The Heading" "$(_page_heading)"
 }
 
+testImageRefs() {
+  assertTrue \
+    "without alt tag" \
+    "_page_image_refs | grep '^2$'"
+
+  assertTrue \
+    "with alt tag" \
+    "_page_image_refs | grep '^3$'"
+
+  assertTrue \
+    "inline image" \
+    "_page_image_refs | grep '^5$'"
+}
+
 # load and run shUnit2
 source $(dirname $0)/shunit/src/shunit2
 
