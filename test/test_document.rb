@@ -8,7 +8,10 @@ context "#FuckYeahArchive::Document" do
     end
 
     asserts("heading") { topic.heading }.equals("The Heading")
+    asserts("slug") { topic.slug }.equals("the-heading")
     asserts("source") { topic.source }.equals("http://example.com/blah.html")
+    asserts("file") { topic.file }.matches(/20[0-9]{6}-the-heading\.md/)
+    asserts("asset_directory") { topic.asset_directory }.matches(/20[0-9]{6}-the-heading/)
 
     context "refs" do
       asserts("size") { topic.refs }.size(5)

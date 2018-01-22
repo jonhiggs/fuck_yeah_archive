@@ -1,3 +1,5 @@
+require 'time'
+
 module FuckYeahArchive
   class Document
     def initialize(source)
@@ -17,6 +19,19 @@ module FuckYeahArchive
           return l.split.first
         end
       end
+    end
+
+    def slug
+      heading.downcase.gsub(/[^a-z0-9]/, '-').gsub(/-+/, '-')
+    end
+
+    def file
+      date = Time.now.strftime("%Y%m%d")
+      "#{date}-#{slug}.md"
+    end
+
+    def asset_directory
+      File.basename(file, ".md")
     end
 
     def refs
