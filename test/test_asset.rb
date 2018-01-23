@@ -9,7 +9,7 @@ context "#FuckYeahArchive::Asset" do
         FuckYeahArchive::Asset.new(source, image)
       end
 
-      asserts("url") { topic.url }.equals("http://www.example.com/blah.jpg")
+      asserts("url") { topic.url.to_s }.equals("http://www.example.com/blah.jpg")
     end
 
     context "when absolute" do
@@ -19,7 +19,7 @@ context "#FuckYeahArchive::Asset" do
         FuckYeahArchive::Asset.new(source, image)
       end
 
-      asserts("url") { topic.url }.equals("http://www.example.com/images/blah.jpg")
+      asserts("url") { topic.url.to_s }.equals("http://www.example.com/images/blah.jpg")
     end
 
     context "when relative to doc" do
@@ -29,7 +29,7 @@ context "#FuckYeahArchive::Asset" do
         FuckYeahArchive::Asset.new(source, image)
       end
 
-      asserts("url") { topic.url }.equals("http://www.example.com/images/blah.jpg")
+      asserts("url") { topic.url.to_s }.equals("http://www.example.com/images/blah.jpg")
     end
 
     context "when relative to index" do
@@ -39,7 +39,7 @@ context "#FuckYeahArchive::Asset" do
         FuckYeahArchive::Asset.new(source, image)
       end
 
-      asserts("url") { topic.url }.equals("http://www.example.com/images/blah.jpg")
+      asserts("url") { topic.url.to_s }.equals("http://www.example.com/images/blah.jpg")
     end
   end
 

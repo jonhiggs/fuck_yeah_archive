@@ -11,7 +11,7 @@ module FuckYeahArchive
     def url
       if @image.class.to_s == "URI::Generic"
         if absolute_path?(@image)
-          "#{@source.scheme}://#{@source.hostname}#{@image.path}"
+          URI("#{@source.scheme}://#{@source.hostname}#{@image.path}")
         else
           if path_to_file? @source
             p = File.expand_path(
@@ -22,10 +22,10 @@ module FuckYeahArchive
           else
             p = File.expand_path(File.join(@source.path, @image.path))
           end
-          "#{@source.scheme}://#{@source.hostname}#{p}"
+          URI("#{@source.scheme}://#{@source.hostname}#{p}")
         end
       else
-        "#{@image.scheme}://#{@image.hostname}#{@image.path}"
+        URI("#{@image.scheme}://#{@image.hostname}#{@image.path}")
       end
     end
 
