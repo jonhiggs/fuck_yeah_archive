@@ -2,9 +2,10 @@ require 'uri'
 
 module FuckYeahArchive
   class Asset
-    def initialize(source, image)
+    def initialize(source, image, asset_dir=ENV["TMPDIR"])
       @source = URI(source)
       @image = URI(image)
+      @asset_dir = asset_dir
     end
 
     def url
@@ -26,6 +27,10 @@ module FuckYeahArchive
       else
         "#{@image.scheme}://#{@image.hostname}#{@image.path}"
       end
+    end
+
+    def output_file
+      File.join(@asset_dir, File.basename(@image.path))
     end
 
     private
