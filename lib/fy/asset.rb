@@ -1,4 +1,5 @@
 require 'uri'
+require 'net/http'
 
 module FuckYeahArchive
   class Asset
@@ -31,6 +32,16 @@ module FuckYeahArchive
 
     def output_file
       File.join(@asset_dir, File.basename(@image.path))
+    end
+
+    def fetch
+      FileUtils.mkdir_p(File.dirname(output_file))
+      Net::HTTP.start(url.hostname) do |http|
+        resp = http.get(url.path)
+        open(output_file, "wb") do |file|
+          file.write(resp.body)
+        end
+      end
     end
 
     private
