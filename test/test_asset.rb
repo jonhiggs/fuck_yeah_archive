@@ -1,4 +1,4 @@
-require './test_helper.rb'
+require 'test_helper'
 
 context "#FuckYeahArchive::Asset" do
   context "fully qualified" do

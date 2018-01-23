@@ -1,9 +1,9 @@
-require './test_helper.rb'
+require 'test_helper'
 
 context "#FuckYeahArchive::Document" do
   context "sample/1.md" do
     setup do
-      sample = "./samples/1.md"
+      sample = "test/samples/1.md"
       FuckYeahArchive::Document.new(sample)
     end
 
