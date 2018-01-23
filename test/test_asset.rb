@@ -9,18 +9,36 @@ context "#FuckYeahArchive::Asset" do
     end
 
     asserts("url") { topic.url }.equals("http://www.example.com/blah.jpg")
-
   end
 
-  context "relative" do
+  context "absolute" do
     setup do
-      source = "http://www.example.com/somewhere.md"
-      image = "blah.jpg"
+      source = "http://www.example.com/doc/somewhere.html"
+      image = "/images/blah.jpg"
       FuckYeahArchive::Asset.new(source, image)
     end
 
-    asserts("url") { topic.url }.equals("http://www.example.com/blah.jpg")
+    asserts("url") { topic.url }.equals("http://www.example.com/images/blah.jpg")
+  end
 
+  context "relative to doc" do
+    setup do
+      source = "http://www.example.com/docs/somewhere.html"
+      image = "../images/blah.jpg"
+      FuckYeahArchive::Asset.new(source, image)
+    end
+
+    asserts("url") { topic.url }.equals("http://www.example.com/images/blah.jpg")
+  end
+
+  context "relative to index" do
+    setup do
+      source = "http://www.example.com/docs/"
+      image = "../images/blah.jpg"
+      FuckYeahArchive::Asset.new(source, image)
+    end
+
+    asserts("url") { topic.url }.equals("http://www.example.com/images/blah.jpg")
   end
 
 end
