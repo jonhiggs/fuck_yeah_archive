@@ -13,6 +13,12 @@ context "#FuckYeahArchive::Document" do
     asserts("file") { topic.file }.matches(/20[0-9]{6}-the-heading\.md/)
     asserts("asset_directory") { topic.asset_directory }.matches(/20[0-9]{6}-the-heading/)
 
+    context "article" do
+      asserts("start position") { topic.article.split("\n")[1] }.equals('this is [link1][1].')
+      asserts("end position") { topic.article.split("\n")[-1] }.equals('an image ![within][5] a sentence')
+      asserts("size") { topic.article.split("\n").size }.equals(11)
+    end
+
     context "refs" do
       asserts("size") { topic.refs }.size(5)
       asserts("1") { topic.refs[1] }.equals("http://www.google.com/")

@@ -21,6 +21,21 @@ module FuckYeahArchive
       end
     end
 
+    def article
+      data = ""
+      started = false
+      @markdown.each_line do |l|
+        if l.match(/^# #{heading}/)
+          started = true
+          next
+        end
+        break if l.match(/^\[1\]:\ /)
+
+        data += l if started
+      end
+      data
+    end
+
     def slug
       heading.downcase.gsub(/[^a-z0-9]/, '-').gsub(/-+/, '-')
     end
