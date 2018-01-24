@@ -3,19 +3,14 @@ require 'net/http'
 
 module FuckYeahArchive
   class Asset
-    def initialize(source, image, asset_dir=ENV["TMPDIR"])
+    def initialize(source, image)
       @source = URI(source)
       @image = URI(image)
-      @asset_dir = asset_dir
     end
 
     def fetch
-      FileUtils.mkdir_p(File.dirname(output_file))
       Net::HTTP.start(url.hostname) do |http|
-        resp = http.get(url.path)
-        open(output_file, "wb") do |file|
-          file.write(resp.body)
-        end
+        http.get(url.path).body
       end
     end
 
@@ -38,10 +33,6 @@ module FuckYeahArchive
       else
         URI("#{@image.scheme}://#{@image.hostname}#{@image.path}")
       end
-    end
-
-    def output_file
-      File.join(@asset_dir, File.basename(@image.path))
     end
 
     private
