@@ -9,6 +9,16 @@ module FuckYeahArchive
       @asset_dir = asset_dir
     end
 
+    def fetch
+      FileUtils.mkdir_p(File.dirname(output_file))
+      Net::HTTP.start(url.hostname) do |http|
+        resp = http.get(url.path)
+        open(output_file, "wb") do |file|
+          file.write(resp.body)
+        end
+      end
+    end
+
     def url
       if @image.class.to_s == "URI::Generic"
         if absolute_path?(@image)
@@ -34,16 +44,6 @@ module FuckYeahArchive
       File.join(@asset_dir, File.basename(@image.path))
     end
 
-    def fetch
-      FileUtils.mkdir_p(File.dirname(output_file))
-      Net::HTTP.start(url.hostname) do |http|
-        resp = http.get(url.path)
-        open(output_file, "wb") do |file|
-          file.write(resp.body)
-        end
-      end
-    end
-
     private
     def absolute_path? uri
       uri.path.match(/^\//)
@@ -54,23 +54,3 @@ module FuckYeahArchive
     end
   end
 end
-
-#source $(dirname "${BASH_SOURCE[0]}")/page.sh
-#source $(dirname "${BASH_SOURCE[0]}")/slug.sh
-#
-#_asset_url() {
-#  ref_source=$(_page_ref_source $1)
-#  if [[ "${ref_source}" =~ ^https ]]; then
-#    echo "${ref_source}"
-#  else
-#    echo "$(_page_source)$(_page_ref_source $1)"
-#  fi
-#}
-#
-#_asset_filename() {
-#  ref=$1
-#  slug=$(_slug "$(_page_heading)")
-#  dir=$(_asset_directory "${slug}")
-#  file="$(basename $(_asset_url "${ref}"))"
-#  echo "${dir}/${file}"
-#}
