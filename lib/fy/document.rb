@@ -6,7 +6,7 @@ module FuckYeahArchive
       @markdown = File.read(source)
     end
 
-    def heading
+    def title
       @markdown.each_line do |l|
         return l.gsub(/^#\ /, '').strip if l.match(/^#/)
       end
@@ -25,7 +25,7 @@ module FuckYeahArchive
       data = ""
       started = false
       @markdown.each_line do |l|
-        if l.match(/^# #{heading}/)
+        if l.match(/^# #{title}/)
           started = true
           next
         end
@@ -37,7 +37,7 @@ module FuckYeahArchive
     end
 
     def slug
-      heading.downcase.gsub(/[^a-z0-9]/, '-').gsub(/-+/, '-')
+      title.downcase.gsub(/[^a-z0-9]/, '-').gsub(/-+/, '-')
     end
 
     def file

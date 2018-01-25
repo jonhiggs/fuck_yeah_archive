@@ -7,7 +7,7 @@ context "#FuckYeahArchive::Document" do
       FuckYeahArchive::Document.new(sample)
     end
 
-    asserts("heading") { topic.heading }.equals("The Heading")
+    asserts("title") { topic.title }.equals("The Heading")
     asserts("slug") { topic.slug }.equals("the-heading")
     asserts("source") { topic.source }.equals("http://example.com/blah.html")
     asserts("file") { topic.file }.matches(/20[0-9]{6}-the-heading\.md/)
@@ -40,7 +40,5 @@ context "#FuckYeahArchive::Document" do
       asserts("size") { topic.image_ref_ids }.equals([2,3,4,5])
     end
 
-
   end
-
 end
