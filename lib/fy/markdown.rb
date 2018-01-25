@@ -1,17 +1,10 @@
 require 'erb'
 require 'ostruct'
 
-class ErbalT < OpenStruct
-  def render(template)
-    ERB.new(template).result(binding)
-  end
-end
-
 module FuckYeahArchive
   class Markdown
-    def initialize(url)
-      data = Net::HTTP.start(url.hostname) { |http| http.get(url.path).body }
-      @document = FuckYeahArchive::Document.new(data)
+    def initialize(document)
+      @document = document
     end
 
     def render
@@ -24,7 +17,7 @@ module FuckYeahArchive
         :article => @document.article,
         :references => @document.refs,
       }
-      puts ErbalT::render_from_hash(template, vars)
+      ERB.new(template).result(OpenStruct.new(vars).instance_eval { binding })
     end
   end
 end

@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+require 'byebug'
+
 @dir = File.join(File.dirname(__FILE__), "../")
 
 require "#{@dir}/lib/fy.rb"
@@ -6,7 +8,12 @@ require "#{@dir}/lib/fy.rb"
 
 @url = "https://longreads.com/2018/01/25/the-many-acts-of-keith-gordon/"
 
-@markdown = FuckYeahArchive::Markdown.new(URI(@url)).render
+@fuck_yeah_markdown = FuckYeahArchive::FuckYeah.new(@url).markdown
 
+@document = FuckYeahArchive::Document.new(@fuck_yeah_markdown)
+
+blah = FuckYeahArchive::Markdown.new(@document).render
+
+byebug
 
 puts @markdown
