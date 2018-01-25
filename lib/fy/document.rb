@@ -52,7 +52,7 @@ module FuckYeahArchive
     def refs
       refs = {}
       @markdown.each_line do |l|
-        next unless l.match(/^\[\d\]:\ /)
+        next unless l.match(/^\[\d+\]:\ /)
         k,v = l.split
         k.gsub!(/[^0-9]/, '')
         refs[k.to_i] = v
