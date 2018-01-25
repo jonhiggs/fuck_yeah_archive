@@ -3,8 +3,8 @@ require 'test_helper'
 context "#FuckYeahArchive::Document" do
   context "sample/1.md" do
     setup do
-      sample = "test/samples/1.md"
-      FuckYeahArchive::Document.new(sample)
+      sample_file = File.join(File.dirname(__FILE__), "./samples/1.md")
+      FuckYeahArchive::Document.new(File.read(sample_file))
     end
 
     asserts("title") { topic.title }.equals("The Heading")

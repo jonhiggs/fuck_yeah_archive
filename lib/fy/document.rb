@@ -3,7 +3,7 @@ require 'time'
 module FuckYeahArchive
   class Document
     def initialize(source)
-      @markdown = File.read(source)
+      @markdown = source
     end
 
     def title
