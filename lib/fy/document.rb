@@ -69,8 +69,10 @@ module FuckYeahArchive
       ids = []
 
       @markdown.each_line do |l|
-        next unless l.match /!\[.*\]\[.*\]/
-        ids.push(l.match(/!\[.*\]\[([0-9]+)\]/)[1].to_i)
+        next unless l.match /!\[[^\]]*\]\[[^\]]*\]/
+        l.scan(/!\[[^\]]*\]\[[^\]]*\]/).each do |m|
+          ids.push(m.match(/!\[.*\]\[([0-9]+)\]/)[1].to_i)
+        end
       end
       ids.sort.uniq
     end
