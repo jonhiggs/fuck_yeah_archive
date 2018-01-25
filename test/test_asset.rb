@@ -41,6 +41,16 @@ context "#FuckYeahArchive::Asset" do
 
       asserts("url") { topic.url.to_s }.equals("http://www.example.com/images/blah.jpg")
     end
+
+    context "when has query strings" do
+      setup do
+        source = "http://www.example.com/docs/"
+        image = "https://longreadsblog.files.wordpress.com/2018/01/gettyimages-125626049.jpg?w=415&h=582"
+        FuckYeahArchive::Asset.new(source, image)
+      end
+
+      asserts("url") { topic.url.to_s }.equals("https://longreadsblog.files.wordpress.com/2018/01/gettyimages-125626049.jpg")
+    end
   end
 
   #context "fetch" do
