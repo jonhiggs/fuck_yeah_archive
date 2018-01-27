@@ -4,4 +4,6 @@
 
 <%= article %>
 
-<%= references %>
+<% refs.each do |r| %>
+<%= "[#{r[0]}]: #{r[1]}" %>
+<% end %>

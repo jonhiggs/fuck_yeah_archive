@@ -15,7 +15,7 @@ module FuckYeahArchive
         :source => @document.source,
         :title => @document.title,
         :article => @document.article,
-        :references => @document.refs,
+        :refs => @document.refs,
       }
       ERB.new(template).result(OpenStruct.new(vars).instance_eval { binding })
     end
