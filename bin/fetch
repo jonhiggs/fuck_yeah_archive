@@ -6,8 +6,12 @@ require 'fileutils'
 
 require "#{@dir}/lib/fy.rb"
 
+@url = ARGV[0] || ""
 
-@url = "https://longreads.com/2018/01/25/the-many-acts-of-keith-gordon/"
+if URI(@url).class.to_s == "URI::Generic"
+  puts "Error: Invalid URL"
+  exit(1)
+end
 
 @fuck_yeah_markdown = FuckYeahArchive::FuckYeah.new(@url).markdown
 
