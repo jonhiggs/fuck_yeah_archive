@@ -75,6 +75,25 @@ context "#FuckYeahArchive::Document" do
       asserts("14") { topic.image_refs.keys }.includes(14)
     end
 
+    context "ref_type" do
+      asserts("1") { topic.ref_types[1] }.equals(".html")
+      asserts("2") { topic.ref_types[2] }.equals(".gif")
+      asserts("3") { topic.ref_types[3] }.equals(".png")
+      asserts("4") { topic.ref_types[4] }.equals(".html")
+      asserts("5") { topic.ref_types[5] }.equals(".jpg")
+      asserts("6") { topic.ref_types[6] }.equals(".html")
+      asserts("7") { topic.ref_types[7] }.equals(".html")
+      asserts("8") { topic.ref_types[8] }.equals(".jpg")
+      asserts("9") { topic.ref_types[9] }.equals(".jpg")
+      asserts("10") { topic.ref_types[10] }.equals(".jpg")
+      asserts("11") { topic.ref_types[11] }.equals(".html")
+      asserts("12") { topic.ref_types[12] }.equals(".jpg")
+      asserts("13") { topic.ref_types[13] }.equals(".html")
+      asserts("14") { topic.ref_types[14] }.equals(".jpg")
+      asserts("15") { topic.ref_types[15] }.equals(".html")
+      asserts("16") { topic.ref_types[16] }.equals(".html")
+    end
+
     context "image_ref_ids" do
       asserts("size") { topic.image_ref_ids }.equals([2,3,5,8,9,10,12,14])
     end

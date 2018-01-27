@@ -1,4 +1,5 @@
 require 'time'
+require 'uri'
 
 module FuckYeahArchive
   class Document
@@ -58,6 +59,18 @@ module FuckYeahArchive
         refs[k.to_i] = v
       end
       refs
+    end
+
+    def ref_types
+      types = {}
+      refs.each do |id,r|
+        if image_refs.include? id
+          types[id] = File.extname(URI(r).path)
+        else
+          types[id] = ".html"
+        end
+      end
+      types
     end
 
     def image_refs
