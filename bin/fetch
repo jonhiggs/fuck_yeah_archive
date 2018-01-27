@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'byebug'
+require 'fileutils'
 
 @dir = File.join(File.dirname(__FILE__), "../")
 
@@ -12,8 +13,14 @@ require "#{@dir}/lib/fy.rb"
 
 @document = FuckYeahArchive::Document.new(@fuck_yeah_markdown)
 
-blah = FuckYeahArchive::Markdown.new(@document).render
+# write the markdown
+File.write(@document.file, FuckYeahArchive::Markdown.new(@document).render)
 
-byebug
-
-puts @markdown
+# fetch the assets
+@document.image_refs.each do |r,url|
+  FileUtils.mkdir_p @document.asset_directory unless File.directory?(@document.asset_directory)
+  type = @document.ref_types[r]
+  filename = File.join(@document.asset_directory, "#{r}#{type}")
+  asset = FuckYeahArchive::Asset.new(@document.source, url)
+  File.write(filename, asset.fetch)
+end

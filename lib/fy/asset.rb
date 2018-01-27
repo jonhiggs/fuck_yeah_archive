@@ -9,7 +9,7 @@ module FuckYeahArchive
     end
 
     def fetch
-      Net::HTTP.start(url.hostname) do |http|
+      Net::HTTP.start(url.hostname, :use_ssl => url.scheme == 'https') do |http|
         http.get(url.path).body
       end
     end
